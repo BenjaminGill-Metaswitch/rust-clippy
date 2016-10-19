@@ -141,6 +141,16 @@ pub fn main() {
         let manifest_path = std::env::args().skip(2).find(|val| val.starts_with("--manifest-path="));
         let mut metadata = cargo::metadata(manifest_path).expect("could not obtain cargo metadata");
         assert_eq!(metadata.version, 1);
+
+        // We should probably use something like `env::current_dir()` (see
+        // https://github.com/withoutboats/cargo-add/blob/master/src/main.rs) to find the nearest
+        // Cargo.toml and use that to find the crate name.
+
+        // We could then look through the metadata for that crate only.
+
+        // As a next step, it would probably be a good idea to return an iterator(?), and run over
+        // all targets for a crate.
+
         for target in metadata.packages.remove(0).targets {
             let args = std::env::args().skip(2);
             if let Some(first) = target.kind.get(0) {
