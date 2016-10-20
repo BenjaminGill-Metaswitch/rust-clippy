@@ -24,6 +24,7 @@ name = "cargo-clippy"
 test = false
 
 [dependencies]
+toml = "0.1"
 # begin automatic update
 clippy_lints = { version = "0.0.95", path = "clippy_lints" }
 # end automatic update
